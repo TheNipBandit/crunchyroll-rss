@@ -1,6 +1,9 @@
 name: Update feed
 
 on:
+  push:
+    branches: [main]
+    paths: [scrape.py, .github/workflows/update.yml]
   schedule:
     - cron: "17 */3 * * *"
   workflow_dispatch:
