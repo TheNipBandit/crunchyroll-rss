@@ -76,7 +76,8 @@ def _feed_xml(title: str, description: str, feed_url: str,
     ET.SubElement(channel, "link").text = site_url or CR_BASE.rstrip("/")
     ET.SubElement(channel, "description").text = description
     ET.SubElement(channel, "language").text = "en-us"
-    ET.SubElement(channel, "lastBuildDate").text = format_datetime(datetime.now(timezone.utc))
+    ET.SubElement(channel, "lastBuildDate").text = format_datetime(
+        datetime.now(timezone.utc), usegmt=True)
 
     for item in items:
         node = ET.SubElement(channel, "item")
@@ -89,7 +90,8 @@ def _feed_xml(title: str, description: str, feed_url: str,
         if item["thumbnail"]:
             body = f'<img src="{html.escape(item["thumbnail"])}" /><br />' + body
         ET.SubElement(node, "description").text = body
-        ET.SubElement(node, "pubDate").text = format_datetime(item["released"])
+        ET.SubElement(node, "pubDate").text = format_datetime(
+            item["released"].astimezone(timezone.utc), usegmt=True)
         ET.SubElement(node, "category").text = "Anime"
     body = ET.tostring(rss, encoding="unicode")
     return ('<?xml version="1.0" encoding="utf-8"?>\n' + body).encode("utf-8")
@@ -177,7 +179,10 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
     links.extend(f'<li><a href="feeds/{d}.xml">{d.title()}</a></li>' for d in WEEKDAYS)
     page = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Crunchyroll RSS</title><style>
+<title>Crunchyroll RSS</title>
+<link rel="alternate" type="application/rss+xml" title="Crunchyroll Episode Releases" href="index.xml">
+<link rel="alternate" type="application/atom+xml" title="Crunchyroll Episode Releases (Atom)" href="atom.xml">
+<style>
 body{font:16px system-ui;max-width:760px;margin:48px auto;padding:0 20px;line-height:1.6}
 a{color:#e56a20}code{overflow-wrap:anywhere}
 </style></head><body><h1>Crunchyroll RSS</h1>
