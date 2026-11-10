@@ -5,24 +5,19 @@
     "type": "text/html"
   },
   {
-    "url": "https://www.crunchyroll.com/fonts/CrunchyrollAtyp-Bold.woff2",
-    "status": 200,
-    "type": "application/x-www-form-urlencoded"
-  },
-  {
     "url": "https://www.crunchyroll.com/fonts/DMSans.woff2",
     "status": 200,
     "type": "application/x-www-form-urlencoded"
   },
   {
+    "url": "https://www.crunchyroll.com/build/_next/static/css/bbe8f72d40a126bc.css",
+    "status": 200,
+    "type": "text/css"
+  },
+  {
     "url": "https://www.crunchyroll.com/fonts/CrunchyrollAtyp-Regular.woff2",
     "status": 200,
     "type": "application/x-www-form-urlencoded"
-  },
-  {
-    "url": "https://static.crunchyroll.com/analytics/cr-eec-8.11.0.js",
-    "status": 200,
-    "type": "text/javascript"
   },
   {
     "url": "https://www.crunchyroll.com/build/assets/img/footer/footer-bg.webp",
@@ -35,47 +30,12 @@
     "type": "text/css"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/css/bbe8f72d40a126bc.css",
+    "url": "https://www.crunchyroll.com/fonts/CrunchyrollAtyp-Bold.woff2",
     "status": 200,
-    "type": "text/css"
+    "type": "application/x-www-form-urlencoded"
   },
   {
     "url": "https://www.crunchyroll.com/build/_next/static/chunks/webpack-3d0938b8759ddf5f.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/main-app-4999456b0b0fdbc7.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a580b3bfdeaf2f45",
-    "status": 302,
-    "type": ""
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1255-fe0de05b60f8acaa.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/5009-27377b856eab84ae.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1736-9bfc35d769887d86.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/cdn-cgi/challenge-platform/h/b/scripts/jsd/8340802ab0bb/main.js?ray=a580b3bfdeaf2f45",
-    "status": 200,
-    "type": "application/javascript; charset=UTF-8"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/539-2ef6d04572cff9a1.js",
     "status": 200,
     "type": "text/javascript"
   },
@@ -85,52 +45,7 @@
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/app/%5Blocale%5D/%5B%5B...pathname%5D%5D/loading-c424ebe43b28ef6c.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/8094-f939aa4c0f874851.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/4bd1b696-16dcc2bec6e1bff8.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2193-b21cef38274090df.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/9715-7c0aad37dc2472b6.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1917-9d65935c7959edaf.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2658-164b9130d8e0d114.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/8837-a302cb6b7818705b.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1946-7fd95ba55c9ae7a2.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/9005-0a9218fea7fc6bdd.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/main-app-a52b958b2b32d369.js",
     "status": 200,
     "type": "text/javascript"
   },
@@ -140,67 +55,12 @@
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/7032-08a20bfdd26fe504.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2233-2a44bcbee2ce970e.js",
     "status": 200,
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/5762-7ce42b2509d9adcc.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/4551-f8b519787166db6f.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/app/layout-03d73e97b320022c.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/623-3919813a8d24a0cf.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/4151-aeef9ac96ea2ade5.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/5773-14d65e0d662a7a26.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2313-2400f4bf1ba6240d.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2886-3d8931ee43e7ea80.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/6307-7091867424d50324.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3772-833889d6e0a80f2f.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/7678-d55a06175ba84cbe.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3911-e71807245a86a23c.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/5009-27377b856eab84ae.js",
     "status": 200,
     "type": "text/javascript"
   },
@@ -210,17 +70,32 @@
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3335-122380f1a04f73ca.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1736-9bfc35d769887d86.js",
     "status": 200,
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/9871-a960c97cd2e1bdac.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/app/layout-43a9a62748ee1567.js",
     "status": 200,
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3196-945a76d72959fdd1.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/5762-7ce42b2509d9adcc.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3772-833889d6e0a80f2f.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/539-2ef6d04572cff9a1.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/8837-a302cb6b7818705b.js",
     "status": 200,
     "type": "text/javascript"
   },
@@ -230,12 +105,122 @@
     "type": "text/javascript"
   },
   {
+    "url": "https://www.crunchyroll.com/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a58347d1ead1f23a",
+    "status": 302,
+    "type": ""
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1917-9d65935c7959edaf.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/7678-d55a06175ba84cbe.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2658-164b9130d8e0d114.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2193-b21cef38274090df.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3911-e71807245a86a23c.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/app/%5Blocale%5D/%5B%5B...pathname%5D%5D/loading-5d13a32a55f9a7b0.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/6628-fb9dfe079abe8788.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2886-3d8931ee43e7ea80.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/9005-0a9218fea7fc6bdd.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/4551-f8b519787166db6f.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/8094-f939aa4c0f874851.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1946-7fd95ba55c9ae7a2.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/623-3919813a8d24a0cf.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2313-2400f4bf1ba6240d.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3335-122380f1a04f73ca.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
     "url": "https://www.crunchyroll.com/build/_next/static/chunks/2382-6f6ae717a12d37cb.js",
     "status": 200,
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/7601-8487f388bb325a04.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/3196-945a76d72959fdd1.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/5773-14d65e0d662a7a26.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/4151-aeef9ac96ea2ade5.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2140-c20ea5336be8bf4a.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/7032-08a20bfdd26fe504.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/9871-a960c97cd2e1bdac.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/9715-7c0aad37dc2472b6.js",
     "status": 200,
     "type": "text/javascript"
   },
@@ -245,29 +230,44 @@
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2233-2a44bcbee2ce970e.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/7601-8487f388bb325a04.js",
     "status": 200,
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/app/%5Blocale%5D/layout-6d0d814fbd0c4a3f.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/6307-7091867424d50324.js",
     "status": 200,
     "type": "text/javascript"
   },
   {
-    "url": "https://www.crunchyroll.com/cdn-cgi/challenge-platform/h/b/jsd/oneshot/8340802ab0bb/0.40244402802819623:1794266133:BdJifcMFRV-iLUGpw0tDnFdlxmM5Jrsw7LgKQ74p_qc/a580b3bfdeaf2f45",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/4bd1b696-16dcc2bec6e1bff8.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/1255-fe0de05b60f8acaa.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/cdn-cgi/challenge-platform/h/b/scripts/jsd/8340802ab0bb/main.js?ray=a58347d1ead1f23a",
+    "status": 200,
+    "type": "application/javascript; charset=UTF-8"
+  },
+  {
+    "url": "https://static.crunchyroll.com/analytics/cr-eec-8.11.0.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/app/%5Blocale%5D/layout-ae64ae1b21507918.js",
+    "status": 200,
+    "type": "text/javascript"
+  },
+  {
+    "url": "https://www.crunchyroll.com/cdn-cgi/challenge-platform/h/b/jsd/oneshot/8340802ab0bb/0.45755764099097274:1794291336:ZOfXCxUCKF5OnML3sFHYNO4vWOusP1uCY612DkXbuts/a58347d1ead1f23a",
     "status": 200,
     "type": "text/plain; charset=UTF-8"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/6628-fb9dfe079abe8788.js",
-    "status": 200,
-    "type": "text/javascript"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/2140-c20ea5336be8bf4a.js",
-    "status": 200,
-    "type": "text/javascript"
   },
   {
     "url": "https://global.ketchcdn.com/web/v3/config/ketch_crunchyroll/crunchyroll___web___prod/boot.js",
@@ -285,7 +285,7 @@
     "type": "text/html; charset=UTF-8"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/217.45a2fc08f1dd63a5.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/76849d38-ebf6ed5a1b93f04c.js",
     "status": 403,
     "type": "text/html; charset=UTF-8"
   },
@@ -295,17 +295,12 @@
     "type": "text/html; charset=UTF-8"
   },
   {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/76849d38-ebf6ed5a1b93f04c.js",
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/217.45a2fc08f1dd63a5.js",
     "status": 403,
     "type": "text/html; charset=UTF-8"
   },
   {
     "url": "https://www.crunchyroll.com/build/_next/static/chunks/3777.aeb89744336a29c6.js",
-    "status": 403,
-    "type": "text/html; charset=UTF-8"
-  },
-  {
-    "url": "https://www.crunchyroll.com/build/_next/static/chunks/8954.d11414d2323c8274.js",
     "status": 403,
     "type": "text/html; charset=UTF-8"
   },
@@ -316,6 +311,11 @@
   },
   {
     "url": "https://www.crunchyroll.com/build/_next/static/chunks/6355.4dc62479349e8cf0.js",
+    "status": 403,
+    "type": "text/html; charset=UTF-8"
+  },
+  {
+    "url": "https://www.crunchyroll.com/build/_next/static/chunks/8954.d11414d2323c8274.js",
     "status": 403,
     "type": "text/html; charset=UTF-8"
   },
