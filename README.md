@@ -20,7 +20,7 @@ After GitHub Pages is enabled and the first workflow run succeeds:
 5. Open **Actions → Update Crunchyroll RSS → Run workflow**.
 6. After it succeeds, open the Pages URL and subscribe to `index.xml` in your RSS reader.
 
-The workflow also runs automatically every six hours and on pushes to `main`.
+The workflow also runs automatically every hour and on pushes to `main`.
 GitHub's scheduled workflows can start later than their exact cron time.
 
 ## Configuration
