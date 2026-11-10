@@ -19,6 +19,8 @@ MEDIA_NS = "http://search.yahoo.com/mrss/"
 ET.register_namespace("media", MEDIA_NS)
 ATOM_NS = "http://www.w3.org/2005/Atom"
 ET.register_namespace("atom", ATOM_NS)
+CONTENT_NS = "http://purl.org/rss/1.0/modules/content/"
+ET.register_namespace("content", CONTENT_NS)
 
 
 def parse_release_datetime(value: str | None, tz: ZoneInfo) -> datetime:
@@ -51,7 +53,8 @@ def normalize_release(row: dict[str, Any], tz: ZoneInfo) -> dict[str, Any]:
     description_parts = [f"Release: {local_stamp}"]
     if number not in (None, ""):
         description_parts.append(f"Episode number: {number}")
-    description_parts.append(f"Premium marker: {'yes' if premium else 'no'}")
+    if premium:
+        description_parts.append("Premium")
     return {
         "title": title,
         "url": url,
@@ -88,6 +91,12 @@ def _feed_xml(title: str, description: str, feed_url: str,
             guid = f'{item["title"]}-{item["released"].isoformat()}'
             ET.SubElement(node, "guid", {"isPermaLink": "false"}).text = guid
         ET.SubElement(node, "description").text = item["description"]
+        body = f'<p>{html.escape(item["description"])}</p>'
+        if item["thumbnail"]:
+            body = f'<p><img src="{html.escape(item["thumbnail"])}" alt=""/></p>' + body
+        if item["url"]:
+            body += f'<p><a href="{html.escape(item["url"])}">Watch on Crunchyroll</a></p>'
+        ET.SubElement(node, f"{{{CONTENT_NS}}}encoded").text = body
         ET.SubElement(node, "pubDate").text = format_datetime(item["released"])
         ET.SubElement(node, "category").text = "Anime"
         if item["thumbnail"]:
@@ -105,7 +114,11 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
     for item in normalized:
         key = item["url"] or f'{item["title"]}|{item["released"].isoformat()}'
         unique[key] = item
-    all_items = sorted(unique.values(), key=lambda x: x["released"])
+    now = datetime.now(timezone.utc)
+    all_items = sorted(
+        (x for x in unique.values() if x["released"] <= now),
+        key=lambda x: x["released"], reverse=True,
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
 
     targets = [("index.xml", feed_title, all_items)]
