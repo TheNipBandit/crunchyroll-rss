@@ -69,39 +69,30 @@ def normalize_release(row: dict[str, Any], tz: ZoneInfo) -> dict[str, Any]:
 
 def _feed_xml(title: str, description: str, feed_url: str,
               items: list[dict[str, Any]], site_url: str) -> bytes:
+    """Plain RSS 2.0: no extra namespaces, double-quoted declaration."""
     rss = ET.Element("rss", {"version": "2.0"})
     channel = ET.SubElement(rss, "channel")
     ET.SubElement(channel, "title").text = title
-    ET.SubElement(channel, "description").text = description
     ET.SubElement(channel, "link").text = site_url or CR_BASE.rstrip("/")
+    ET.SubElement(channel, "description").text = description
     ET.SubElement(channel, "language").text = "en-us"
     ET.SubElement(channel, "lastBuildDate").text = format_datetime(datetime.now(timezone.utc))
-    if feed_url:
-        ET.SubElement(channel, f"{{{ATOM_NS}}}link", {
-            "href": feed_url, "rel": "self", "type": "application/rss+xml"
-        })
 
     for item in items:
         node = ET.SubElement(channel, "item")
         ET.SubElement(node, "title").text = item["title"]
-        if item["url"]:
-            ET.SubElement(node, "link").text = item["url"]
-            ET.SubElement(node, "guid", {"isPermaLink": "true"}).text = item["url"]
-        else:
-            guid = f'{item["title"]}-{item["released"].isoformat()}'
-            ET.SubElement(node, "guid", {"isPermaLink": "false"}).text = guid
-        ET.SubElement(node, "description").text = item["description"]
-        body = f'<p>{html.escape(item["description"])}</p>'
+        link = item["url"].split("#")[0] if item["url"] else CR_BASE
+        ET.SubElement(node, "link").text = link
+        guid = item["url"] or f'{item["title"]}-{item["released"].isoformat()}'
+        ET.SubElement(node, "guid", {"isPermaLink": "false"}).text = guid
+        body = html.escape(item["description"])
         if item["thumbnail"]:
-            body = f'<p><img src="{html.escape(item["thumbnail"])}" alt=""/></p>' + body
-        if item["url"]:
-            body += f'<p><a href="{html.escape(item["url"])}">Watch on Crunchyroll</a></p>'
-        ET.SubElement(node, f"{{{CONTENT_NS}}}encoded").text = body
+            body = f'<img src="{html.escape(item["thumbnail"])}" /><br />' + body
+        ET.SubElement(node, "description").text = body
         ET.SubElement(node, "pubDate").text = format_datetime(item["released"])
         ET.SubElement(node, "category").text = "Anime"
-        if item["thumbnail"]:
-            ET.SubElement(node, f"{{{MEDIA_NS}}}thumbnail", {"url": item["thumbnail"]})
-    return ET.tostring(rss, encoding="utf-8", xml_declaration=True)
+    body = ET.tostring(rss, encoding="unicode")
+    return ('<?xml version="1.0" encoding="utf-8"?>\n' + body).encode("utf-8")
 
 
 def _write_alt_feeds(output_dir: Path, title: str, description: str,
