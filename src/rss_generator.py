@@ -104,6 +104,45 @@ def _feed_xml(title: str, description: str, feed_url: str,
     return ET.tostring(rss, encoding="utf-8", xml_declaration=True)
 
 
+def _write_alt_feeds(output_dir: Path, title: str, description: str,
+                     items: list[dict[str, Any]], base: str) -> None:
+    """Atom (atom.xml) and JSON Feed (feed.json) copies of the main feed."""
+    import json
+    updated = items[0]["released"] if items else datetime.now(timezone.utc)
+    A = "{http://www.w3.org/2005/Atom}"
+    feed = ET.Element(f"{A}feed")
+    ET.SubElement(feed, f"{A}title").text = title
+    ET.SubElement(feed, f"{A}subtitle").text = description
+    ET.SubElement(feed, f"{A}id").text = f"{base}/atom.xml" if base else CR_BASE
+    ET.SubElement(feed, f"{A}updated").text = updated.isoformat()
+    ET.SubElement(feed, f"{A}link", {"rel": "self", "href": f"{base}/atom.xml"})
+    for it in items:
+        e = ET.SubElement(feed, f"{A}entry")
+        ET.SubElement(e, f"{A}title").text = it["title"]
+        ET.SubElement(e, f"{A}id").text = it["url"] or f'{it["title"]}-{it["released"].isoformat()}'
+        ET.SubElement(e, f"{A}link", {"href": it["url"] or CR_BASE})
+        ET.SubElement(e, f"{A}updated").text = it["released"].isoformat()
+        ET.SubElement(e, f"{A}published").text = it["released"].isoformat()
+        ET.SubElement(e, f"{A}summary").text = it["description"]
+    (output_dir / "atom.xml").write_bytes(
+        ET.tostring(feed, encoding="utf-8", xml_declaration=True))
+    data = {
+        "version": "https://jsonfeed.org/version/1.1",
+        "title": title, "description": description,
+        "home_page_url": base or CR_BASE,
+        "feed_url": f"{base}/feed.json" if base else "",
+        "items": [{
+            "id": it["url"] or f'{it["title"]}-{it["released"].isoformat()}',
+            "url": it["url"] or CR_BASE,
+            "title": it["title"],
+            "content_text": it["description"],
+            "date_published": it["released"].isoformat(),
+            **({"image": it["thumbnail"]} if it["thumbnail"] else {}),
+        } for it in items],
+    }
+    (output_dir / "feed.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
+
+
 def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
                 timezone_name: str, feed_title: str, feed_description: str,
                 site_url: str = "") -> int:
@@ -138,8 +177,12 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
         temporary.write_bytes(xml)
         temporary.replace(path)
 
+    _write_alt_feeds(output_dir, feed_title, feed_description, all_items, base)
+
     # Tiny human-readable landing page.
-    links = ['<li><a href="index.xml">All releases</a></li>']
+    links = ['<li><a href="index.xml">All releases (RSS)</a></li>',
+             '<li><a href="atom.xml">All releases (Atom)</a></li>',
+             '<li><a href="feed.json">All releases (JSON Feed)</a></li>']
     links.extend(f'<li><a href="feeds/{d}.xml">{d.title()}</a></li>' for d in WEEKDAYS)
     page = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
