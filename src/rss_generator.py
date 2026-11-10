@@ -172,20 +172,6 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
 
     _write_alt_feeds(output_dir, feed_title, feed_description, all_items, base)
 
-    # Diagnostics for readers that hide old items (e.g. Reeder's timeline).
-    stamp = datetime.now(tz)
-    all_now = [{**x, "released": stamp} for x in all_items]
-    tests = [{
-        "title": f"Reeder test entry {n}", "url": f"{base or CR_BASE.rstrip('/')}/#test-{n}",
-        "released": stamp, "number": "", "thumbnail": "", "premium": False,
-        "description": "Test entry to check that this reader can show items.",
-        "weekday": WEEKDAYS[stamp.weekday()],
-    } for n in (1, 2, 3)]
-    for name, items_, ttl in (("all-now.xml", all_now, feed_title + " (all, stamped now)"),
-                              ("test-now.xml", tests, "Reeder test feed")):
-        (output_dir / name).write_bytes(_feed_xml(
-            ttl, feed_description, f"{base}/{name}" if base else "", items_, base))
-
     # Human-readable page: all recent episodes, newest first, grouped by day.
     esc = html.escape
     sections, current = [], None
