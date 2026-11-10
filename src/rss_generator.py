@@ -186,23 +186,53 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
         (output_dir / name).write_bytes(_feed_xml(
             ttl, feed_description, f"{base}/{name}" if base else "", items_, base))
 
-    # Tiny human-readable landing page.
-    links = ['<li><a href="index.xml">All releases (RSS)</a></li>',
-             '<li><a href="atom.xml">All releases (Atom)</a></li>',
-             '<li><a href="feed.json">All releases (JSON Feed)</a></li>']
-    links.extend(f'<li><a href="feeds/{d}.xml">{d.title()}</a></li>' for d in WEEKDAYS)
-    page = """<!doctype html><html lang="en"><head><meta charset="utf-8">
+    # Human-readable page: all recent episodes, newest first, grouped by day.
+    esc = html.escape
+    sections, current = [], None
+    for it in all_items:
+        day = f"{it['released'].strftime('%A, %B')} {it['released'].day}, {it['released'].year}"
+        if day != current:
+            if current is not None:
+                sections.append("</ul>")
+            sections.append(f"<h2>{esc(day)}</h2><ul>")
+            current = day
+        hour = it["released"].hour % 12 or 12
+        when = f"{hour}:{it['released'].minute:02d} {'AM' if it['released'].hour < 12 else 'PM'}"
+        img = f'<img src="{esc(it["thumbnail"])}" alt="" loading="lazy">' if it["thumbnail"] else ""
+        link = esc(it["url"].split("#")[0]) if it["url"] else CR_BASE
+        sections.append(
+            f'<li>{img}<div><a href="{link}">{esc(it["title"])}</a>'
+            f'<span>{when}</span></div></li>')
+    if current is not None:
+        sections.append("</ul>")
+    updated = datetime.now(tz)
+    stamp_text = f"{updated.strftime('%B')} {updated.day}, {updated.year} {updated.hour % 12 or 12}:{updated.minute:02d} {'AM' if updated.hour < 12 else 'PM'} {updated.tzname() or ''}"
+    page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Crunchyroll RSS</title>
-<link rel="alternate" type="application/rss+xml" title="Crunchyroll Episode Releases" href="index.xml">
-<link rel="alternate" type="application/atom+xml" title="Crunchyroll Episode Releases (Atom)" href="atom.xml">
+<title>{esc(feed_title)}</title>
+<link rel="alternate" type="application/rss+xml" title="{esc(feed_title)}" href="index.xml">
+<link rel="alternate" type="application/atom+xml" title="{esc(feed_title)} (Atom)" href="atom.xml">
 <style>
-body{font:16px system-ui;max-width:760px;margin:48px auto;padding:0 20px;line-height:1.6}
-a{color:#e56a20}code{overflow-wrap:anywhere}
-</style></head><body><h1>Crunchyroll RSS</h1>
-<p>Subscribe to the main feed or an individual weekday feed in your RSS reader.</p>
-<ul>""" + "".join(links) + """</ul>
-<p>Feeds are generated automatically from Crunchyroll's public release calendar.
-Unofficial project; not affiliated with Crunchyroll.</p></body></html>"""
+:root{{color-scheme:light dark}}
+body{{font:16px/1.5 system-ui,sans-serif;max-width:720px;margin:0 auto;padding:20px 16px 60px}}
+h1{{font-size:1.5rem;margin:.2em 0}}
+h2{{font-size:1rem;margin:1.8em 0 .5em;padding-bottom:.3em;border-bottom:1px solid #8884;color:#e56a20}}
+ul{{list-style:none;margin:0;padding:0}}
+li{{display:flex;gap:12px;align-items:center;padding:8px 0}}
+li img{{width:48px;height:68px;object-fit:cover;border-radius:6px;flex:none;background:#8883}}
+li div{{display:flex;flex-direction:column}}
+li a{{color:inherit;text-decoration:none;font-weight:600}}
+li a:hover{{text-decoration:underline}}
+li span,.meta,footer{{font-size:.85rem;opacity:.7}}
+footer{{margin-top:2.5em}}
+footer a{{color:#e56a20}}
+</style></head><body>
+<h1>{esc(feed_title)}</h1>
+<p class="meta">{len(all_items)} episodes &middot; updated {esc(stamp_text)}</p>
+{"".join(sections) or "<p>No episodes found.</p>"}
+<footer>Feeds: <a href="index.xml">RSS</a> &middot; <a href="atom.xml">Atom</a> &middot;
+<a href="feed.json">JSON</a><br>
+Unofficial; data from AniList and Crunchyroll's public calendar. Not affiliated with Crunchyroll.</footer>
+</body></html>"""
     (output_dir / "index.html").write_text(page, encoding="utf-8")
     return len(all_items)
