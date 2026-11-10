@@ -66,3 +66,10 @@ Generated XML files are written to `docs/`.
 Unofficial community project. Not affiliated with or endorsed by Crunchyroll.
 The calendar extraction depends on
 [PD-Codes/crunchyroll-api](https://github.com/PD-Codes/crunchyroll-api).
+
+## Always-on server (Railway)
+
+`server.py` + `Dockerfile` run the same feed as a small web service that re-checks
+AniList every 2 minutes (`REFRESH_SECONDS`). In Railway: New Project -> Deploy from
+GitHub repo -> this repo -> Settings -> Networking -> Generate Domain.
+Feed: `https://<your-domain>/index.xml`. Page: `https://<your-domain>/`.
