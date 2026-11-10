@@ -97,45 +97,6 @@ def _feed_xml(title: str, description: str, feed_url: str,
     return ('<?xml version="1.0" encoding="utf-8"?>\n' + body).encode("utf-8")
 
 
-def _write_alt_feeds(output_dir: Path, title: str, description: str,
-                     items: list[dict[str, Any]], base: str) -> None:
-    """Atom (atom.xml) and JSON Feed (feed.json) copies of the main feed."""
-    import json
-    updated = items[0]["released"] if items else datetime.now(timezone.utc)
-    A = "{http://www.w3.org/2005/Atom}"
-    feed = ET.Element(f"{A}feed")
-    ET.SubElement(feed, f"{A}title").text = title
-    ET.SubElement(feed, f"{A}subtitle").text = description
-    ET.SubElement(feed, f"{A}id").text = f"{base}/atom.xml" if base else CR_BASE
-    ET.SubElement(feed, f"{A}updated").text = updated.isoformat()
-    ET.SubElement(feed, f"{A}link", {"rel": "self", "href": f"{base}/atom.xml"})
-    for it in items:
-        e = ET.SubElement(feed, f"{A}entry")
-        ET.SubElement(e, f"{A}title").text = it["title"]
-        ET.SubElement(e, f"{A}id").text = it["url"] or f'{it["title"]}-{it["released"].isoformat()}'
-        ET.SubElement(e, f"{A}link", {"href": it["url"] or CR_BASE})
-        ET.SubElement(e, f"{A}updated").text = it["released"].isoformat()
-        ET.SubElement(e, f"{A}published").text = it["released"].isoformat()
-        ET.SubElement(e, f"{A}summary").text = it["description"]
-    (output_dir / "atom.xml").write_bytes(
-        ET.tostring(feed, encoding="utf-8", xml_declaration=True))
-    data = {
-        "version": "https://jsonfeed.org/version/1.1",
-        "title": title, "description": description,
-        "home_page_url": base or CR_BASE,
-        "feed_url": f"{base}/feed.json" if base else "",
-        "items": [{
-            "id": it["url"] or f'{it["title"]}-{it["released"].isoformat()}',
-            "url": it["url"] or CR_BASE,
-            "title": it["title"],
-            "content_text": it["description"],
-            "date_published": it["released"].isoformat(),
-            **({"image": it["thumbnail"]} if it["thumbnail"] else {}),
-        } for it in items],
-    }
-    (output_dir / "feed.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
-
-
 def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
                 timezone_name: str, feed_title: str, feed_description: str,
                 site_url: str = "") -> int:
@@ -170,7 +131,6 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
         temporary.write_bytes(xml)
         temporary.replace(path)
 
-    _write_alt_feeds(output_dir, feed_title, feed_description, all_items, base)
 
     # Diagnostics for readers that hide old items (e.g. Reeder's timeline).
     stamp = datetime.now(tz)
@@ -211,7 +171,6 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(feed_title)}</title>
 <link rel="alternate" type="application/rss+xml" title="{esc(feed_title)}" href="index.xml">
-<link rel="alternate" type="application/atom+xml" title="{esc(feed_title)} (Atom)" href="atom.xml">
 <style>
 :root{{color-scheme:light dark}}
 body{{font:16px/1.5 system-ui,sans-serif;max-width:720px;margin:0 auto;padding:20px 16px 60px}}
@@ -230,8 +189,7 @@ footer a{{color:#e56a20}}
 <h1>{esc(feed_title)}</h1>
 <p class="meta">{len(all_items)} episodes &middot; updated {esc(stamp_text)}</p>
 {"".join(sections) or "<p>No episodes found.</p>"}
-<footer>Feeds: <a href="index.xml">RSS</a> &middot; <a href="atom.xml">Atom</a> &middot;
-<a href="feed.json">JSON</a><br>
+<footer>Feed: <a href="index.xml">RSS</a><br>
 Unofficial; data from AniList and Crunchyroll's public calendar. Not affiliated with Crunchyroll.</footer>
 </body></html>"""
     (output_dir / "index.html").write_text(page, encoding="utf-8")
