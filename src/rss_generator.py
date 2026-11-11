@@ -155,6 +155,7 @@ def write_feeds(rows: list[dict[str, Any]], output_dir: Path,
     stamp_text = f"{updated.strftime('%B')} {updated.day}, {updated.year} {updated.hour % 12 or 12}:{updated.minute:02d} {'AM' if updated.hour < 12 else 'PM'} {updated.tzname() or ''}"
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="refresh" content="120">
 <title>{esc(feed_title)}</title>
 <link rel="alternate" type="application/rss+xml" title="{esc(feed_title)}" href="index.xml">
 <style>
