@@ -23,7 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from anilist_source import fetch_recent  # noqa: E402
+from sources import get_rows  # noqa: E402
 from rss_generator import write_feeds  # noqa: E402
 
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
@@ -47,9 +47,10 @@ _updated = 0.0
 def refresh_once() -> int:
     """Rebuild the site into a fresh directory and swap it in. Returns item count."""
     global _current, _updated
-    rows = fetch_recent(days_back=DAYS)
+    rows = get_rows(TIMEZONE, DAYS, os.getenv("CRUNCHYROLL_LOCALE", CONFIG.get("locale", "en-US")),
+                    cr_ttl=int(os.getenv("CRUNCHYROLL_REFRESH_SECONDS", "600")))
     if not rows:
-        raise RuntimeError("AniList returned no Crunchyroll releases")
+        raise RuntimeError("No releases found from any source")
     new_dir = Path(tempfile.mkdtemp(prefix="site-"))
     try:
         count = write_feeds(

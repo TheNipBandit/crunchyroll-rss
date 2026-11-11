@@ -8,8 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from anilist_source import fetch_recent
-from crunchyroll_source import fetch_calendar
+from sources import get_rows
 from rss_generator import write_feeds
 
 
@@ -20,16 +19,7 @@ def main() -> None:
     locale = os.getenv("CRUNCHYROLL_LOCALE", config.get("locale", "en-US"))
     site_url = os.getenv("SITE_URL", "").rstrip("/")
 
-    print(f"Fetching Crunchyroll releases for the next {days_to_scan} calendar days...")
-    try:
-        rows = fetch_calendar(timezone_name, days_to_scan, locale)
-    except Exception as exc:
-        print(f"Crunchyroll calendar failed: {type(exc).__name__}: {exc}")
-        rows = []
-    if not rows:
-        print("Crunchyroll calendar returned 0 releases; using AniList fallback.")
-        rows = fetch_recent(days_back=days_to_scan)
-        print(f"AniList fallback found {len(rows)} Crunchyroll releases.")
+    rows = get_rows(timezone_name, days_to_scan, locale, cr_ttl=0)
     if not rows:
         sys.exit("No releases found from any source; leaving the published feed unchanged.")
     count = write_feeds(

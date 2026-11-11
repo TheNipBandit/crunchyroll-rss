@@ -9,9 +9,11 @@ from crunchyroll_api import CrunchyrollClient
 
 
 def fetch_calendar(timezone_name: str = "America/New_York",
-                   days_to_scan: int = 7,
+                   days_back: int = 7,
+                   days_ahead: int = 0,
                    locale: str = "en-US") -> list[dict[str, Any]]:
-    """Fetch and de-duplicate the rolling calendar window.
+    """Fetch and de-duplicate the calendar from `days_back` days ago through
+    `days_ahead` days from now (today is always included).
 
     Crunchyroll's calendar is unofficial/undocumented and best-effort. The
     upstream library scrapes its public HTML schema.org blocks. No login or
@@ -24,7 +26,7 @@ def fetch_calendar(timezone_name: str = "America/New_York",
     errors: list[str] = []
 
     try:
-        for offset in range(max(1, days_to_scan)):
+        for offset in range(-max(0, days_back), max(0, days_ahead) + 1):
             query_date = (today + timedelta(days=offset)).isoformat()
             try:
                 # premium_only=False means don't restrict the page to Premium
